@@ -57,7 +57,7 @@ int execfile(char *filename)
 	return (EXIT_FAILURE);
       if (close(fd) < 0)
 	return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+      return (EXIT_SUCCESS);
     }
   free(name);
   return (EXIT_FAILURE);
