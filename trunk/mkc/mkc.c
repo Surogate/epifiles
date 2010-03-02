@@ -16,6 +16,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "mkc.h"
+#include "../auteur.h"
 
 int main(int ac, char **av)
 {
@@ -71,7 +72,27 @@ int write_header(int fd, char *filename)
     return (EXIT_FAILURE);
   if (xfwrite(fd, filename) < 0)
     return (EXIT_FAILURE);
-  if (xfwrite(fd, " for project in /u/all/ancel_a/cu/travail/c/\n**\n** Made by francois1 ancel\n** Login   <ancel_a@epitech.net>\n**\n** Started on  Wed Feb 24 14:52:36 2010 francois1 ancel\n** Last update Thu Feb 25 12:10:54 2010 francois1 ancel\n*/\n\n") < 0)
+   if (xfwrite(fd, " for project in /u/all/") < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, LOGIN) < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, "/cu/travail/c/\n**\n** Made by ") < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, NAME) < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, "\n** Login   <") < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, LOGIN) < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, "@epitech.net>\n**\n** Started on  Wed Feb 24 14:52:36 2010 ") < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, NAME) < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, "\n** Last update Thu Feb 25 12:10:54 2010 ") < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, NAME) < 0)
+    return (EXIT_FAILURE);
+ if (xfwrite(fd, "\n*/\n\n") < 0)
     return (EXIT_FAILURE);
   return (EXIT_SUCCESS);
 }
