@@ -16,11 +16,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-int execfile(char *filename);
-int xfwrite(int fd, char *str);
-int write_header(int fd, char *filename);
-int write_save(int fd, char *filename);
-
 int main(int ac, char **av)
 {
   int i;
