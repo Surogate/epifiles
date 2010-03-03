@@ -11,7 +11,8 @@
 NAME	= mkh
 CC	= gcc
 RM	= rm -rf
-SRCS	= mkh.c
+SRCS	= mkh.c	\
+	header.c
 
 OBJS	= $(SRCS:.c=.o)
 CFLAGS	= -O3
