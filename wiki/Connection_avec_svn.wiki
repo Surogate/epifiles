@@ -1,5 +1,4 @@
 #labels Phase-Implementation
-Le petit tuto que j'avais envoyer par mail pour ce co avec le svn
 
 Pour tous ceux qui aurais la flemme de rechercher comment on fait...
 N'hésitez pas a modifier/compléter cette page si vous utiliser un autre logiciel de svn
