@@ -1,5 +1,4 @@
 #labels Phase-Implementation
-
 Pour tous ceux qui aurais la flemme de rechercher comment on fait...
 N'hésitez pas a modifier/compléter cette page si vous utiliser un autre logiciel de svn
 
@@ -20,7 +19,7 @@ Je conseil d'en utiliser un dans htdocs / www afin de pas vous embêtez a copier
 - Sur Kdesvn (Linux) ET sur la VM:{
 
 + editer le fichier ~/.subversion/servers
-                           
+
 + allez tout en bas du fichier au niveau de [global]
 
 + retirer les # et les espace devant les ligne qui commence par http-proxy
