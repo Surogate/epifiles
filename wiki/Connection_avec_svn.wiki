@@ -22,7 +22,7 @@ Je conseil d'en utiliser un dans htdocs / www afin de pas vous embêtez a copier
 
 + allez tout en bas du fichier au niveau de [global]
 
-+ retirer les # et les espace devant les ligne qui commence par http-proxy
++ retirer les # *et les espace* devant les ligne qui commence par http-proxy
 
 + replisser les lignes...}
 
