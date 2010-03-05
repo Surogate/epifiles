@@ -44,7 +44,8 @@ user et mdp socks
 
 #  sur la VM : rentrer la commande indiquer dans l'onglet source.
 
-voici l'adresse depuis laquelle vous devez recul le site : https://xtechweb.googlecode.com/svn/trunk/
+voici l'adresse depuis laquelle vous devez recul le site :https://epifiles.googlecode.com/svn/trunk/
+
 Pour kdesvn vous devez préciser le dossier d'arriver (celui que vous avez crée a l'étape 1)
 
 ===*4+* S'authentifier lors du Check out===
