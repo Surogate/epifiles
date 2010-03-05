@@ -9,7 +9,7 @@ Note pour tortoise, si vous n'avez aucune icone dans le menu du clique droit, c'
 
 ===*1+* Crée un dossier ou vous voulez récupéré le projet.===
 
-Je conseil d'en utiliser un dans htdocs / www afin de pas vous embêtez a copier des truc en plus.
+La ou voulez taffer dessus
 
 ===*2+* Configurer le Proxy sur le svn :===
 
