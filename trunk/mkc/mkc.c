@@ -31,6 +31,31 @@ int main(int ac, char **av)
   return (EXIT_SUCCESS);
 }
 
+int open_name(char *filename)
+{
+  int len = strlen(filename);
+
+  if ((filename[len - 1] == 'c') && (filename[len - 2] == '.'))
+    return (open(filename, O_CREAT | O_EXCL | O_WRONLY, 00644));
+  else
+    {
+      char *name;
+
+      name = malloc((len + 2) * sizeof(*name));
+      if (name)
+	{
+	  int fd;
+
+	  strcpy(name, filename);
+	  strcat(name, ".c");
+	  fd = open(name, O_CREAT | O_EXCL | O_WRONLY, 00644);
+	  free(name);
+	  return (fd);
+	}
+    }
+  return (-1);
+}
+
 int execfile(char *filename)
 {   
   int fd;
@@ -38,24 +63,16 @@ int execfile(char *filename)
   char *name;
   int len;
 
-  name = malloc((strlen(filename) + 2) * sizeof(*name));
-  if (name == NULL)
-    return (EXIT_FAILURE);
-  fd = open(strcat(filename, ".c"), O_CREAT | O_EXCL | O_WRONLY, 00644);
+  fd = open_name(filename);
   if (fd != -1)
     {      
       if (write_header(fd, filename) == EXIT_FAILURE)
-	{
-	  free(name);
-	  return (EXIT_FAILURE);
-	}
-      free(name);
+	return (EXIT_FAILURE);
       if (write(fd, include, strlen(include)) < 0)
 	return (EXIT_FAILURE);
       if (close(fd) < 0)
 	return (EXIT_FAILURE);
       return (EXIT_SUCCESS);
     }
-  free(name);
   return (EXIT_FAILURE);
 }
