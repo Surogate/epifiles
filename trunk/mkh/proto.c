@@ -22,7 +22,7 @@
 char *gnl(char *str)
 {
   static int count;
-  char *line;
+  static char line[1024];
   int len;
   int o;
 
@@ -36,10 +36,9 @@ char *gnl(char *str)
     len++;
   if (len)
     {
-      line = malloc((len) * sizeof(*line));
       if (line)
 	{
-	  for (o = 0; o < len; o++)
+	  for (o = 0; o < len && o < 1024; o++)
 	    line[o] = str[count + o];
 	  line[len] = '\0';
 	  count += len;
@@ -47,12 +46,12 @@ char *gnl(char *str)
 	}
       return (NULL);
     }
-  return ((char *)_MEOF);
+  return (NULL);
 }
 
 int match_proto(char *str)
 {
-  const char *match_exp = ".+ .+\(.+\)";
+  const char *match_exp = ".+ [:alnum:]+[(].*[)]";
   regex_t preg;
   int err;
 
@@ -60,13 +59,12 @@ int match_proto(char *str)
     {
       char *line;
      
-      while ((line = gnl(str)) != (char *)_MEOF)
+      while (line = gnl(str))
 	{
 	  if (line)
 	    {
 	      if (regexec(&preg, line, 0, NULL, 0) == 0)
 		printf("%s\n", line);
-	      free(line);
 	    }
 	}
       regfree(&preg);
