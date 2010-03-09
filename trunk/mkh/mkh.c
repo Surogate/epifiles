@@ -81,10 +81,11 @@ int open_cfile(char *filename)
 {
   int len = strlen(filename);
 
-  if (filename[len - 1] == 'c' && filename[len - 2] == '.')
+  if (filename[len - 1] == 'h' && filename[len - 2] == '.')
     {
+      filename[len - 1] = 'c';
       if (access(filename, R_OK) == 0)
-	return (open(filename, RD_ONLY));
+	return (open(filename, O_RDONLY));
     }
   else
     {
@@ -96,7 +97,7 @@ int open_cfile(char *filename)
 	  strcpy(name, filename);
 	  strcat(name, ".c");
 	  if (access(name, R_OK) == 0)
-	    fd = open(name, RD_ONLY);
+	    fd = open(name, O_RDONLY);
 	  free(name);
 	  return (fd);
 	}
@@ -107,9 +108,9 @@ int open_cfile(char *filename)
 int write_save(int fd, char *filename)
 {
   int i;
-  int fd;
+  int fdfile;
 
-  fd = open_cfile(filename);
+  fdfile = open_cfile(filename);
   for (i = 0; i < strlen(filename); i++)
     {
       if (filename[i] <= 'z' && filename[i] >= 'a')
@@ -122,10 +123,10 @@ int write_save(int fd, char *filename)
   xfwrite(fd, "_INCLUDED\n# define ");
   xfwrite(fd, filename);
   xfwrite(fd, "_INCLUDED\n\n");
-  if (fd != -1)
+  if (fdfile != -1)
     {
-      write_proto(fd);
-      close (fd);
+      write_proto(fdfile);
+      close (fdfile);
     }
   xfwrite(fd, "\n\n#endif\n");
   return (EXIT_SUCCESS);
