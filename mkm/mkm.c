@@ -96,7 +96,7 @@ int listdir(DIR *fd, int fdfile)
 {
   regex_t preg;
   struct dirent *s_dir;
-  const char *to_match = ".+\.c";
+  const char *to_match = ".+\.c$";
   int err;
   int result;
 
