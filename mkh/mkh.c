@@ -77,10 +77,39 @@ int execfile(char *filename)
   return (EXIT_FAILURE);
 }
 
+int open_cfile(char *filename)
+{
+  int len = strlen(filename);
+
+  if (filename[len - 1] == 'c' && filename[len - 2] == '.')
+    {
+      if (access(filename, R_OK) == 0)
+	return (open(filename, RD_ONLY));
+    }
+  else
+    {
+      char *name = malloc((len + 2) * sizeof(*name));
+      if (name)
+	{
+	  int fd = -1;
+
+	  strcpy(name, filename);
+	  strcat(name, ".c");
+	  if (access(name, R_OK) == 0)
+	    fd = open(name, RD_ONLY);
+	  free(name);
+	  return (fd);
+	}
+    }
+  return (-1);
+}
+
 int write_save(int fd, char *filename)
 {
   int i;
+  int fd;
 
+  fd = open_cfile(filename);
   for (i = 0; i < strlen(filename); i++)
     {
       if (filename[i] <= 'z' && filename[i] >= 'a')
@@ -92,6 +121,12 @@ int write_save(int fd, char *filename)
   xfwrite(fd, filename);
   xfwrite(fd, "_INCLUDED\n# define ");
   xfwrite(fd, filename);
-  xfwrite(fd, "_INCLUDED\n\n\n\n#endif\n");
+  xfwrite(fd, "_INCLUDED\n\n");
+  if (fd != -1)
+    {
+      write_proto(fd);
+      close (fd);
+    }
+  xfwrite(fd, "\n\n#endif\n");
   return (EXIT_SUCCESS);
 }
