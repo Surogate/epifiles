@@ -49,13 +49,13 @@ char *gnl(char *str)
   return (NULL);
 }
 
-int match_proto(char *str)
+int match_proto(char *str, int fd)
 {
-  const char *match_exp = ".+ [:alnum:]+[(].*[)]";
+  const char *match_exp = "^[A-Za-z]";
   regex_t preg;
   int err;
 
-  if ((err = regcomp (&preg, match_exp, REG_EXTENDED)) == 0)
+  if ((err = regcomp (&preg, match_exp, REG_NOSUB | REG_EXTENDED)) == 0)
     {
       char *line;
      
@@ -64,7 +64,12 @@ int match_proto(char *str)
 	  if (line)
 	    {
 	      if (regexec(&preg, line, 0, NULL, 0) == 0)
-		printf("%s\n", line);
+		{
+		  if (write(fd, line, strlen(line)) < 0)
+		    return (EXIT_FAILURE);
+		  if (write(fd, ";\n", strlen(";\n")) < 0)
+		    return (EXIT_FAILURE);
+		}
 	    }
 	}
       regfree(&preg);
@@ -73,7 +78,7 @@ int match_proto(char *str)
   return (EXIT_FAILURE);
 }
 
-int write_proto(int fd)
+int write_proto(int fd, int fdfile)
 {
   void *file;
   struct stat s_stat;
@@ -94,7 +99,7 @@ int write_proto(int fd)
   if (file != (char *)MAP_FAILED)
     {
       char *str = (char *)file;
-      match_proto(str);
+      match_proto(str, fdfile);
       munmap(file, s_stat.st_size);
       return (EXIT_SUCCESS);
     }
