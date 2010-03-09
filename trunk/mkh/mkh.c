@@ -125,9 +125,9 @@ int write_save(int fd, char *filename)
   xfwrite(fd, "_INCLUDED\n\n");
   if (fdfile != -1)
     {
-      write_proto(fdfile);
+      write_proto(fdfile, fd);
       close (fdfile);
     }
-  xfwrite(fd, "\n\n#endif\n");
+  xfwrite(fd, "\n#endif\n");
   return (EXIT_SUCCESS);
 }
