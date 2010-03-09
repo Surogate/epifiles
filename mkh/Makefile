@@ -12,7 +12,8 @@ NAME	= mkh
 CC	= gcc
 RM	= rm -rf
 SRCS	= mkh.c	\
-	header.c
+	header.c \
+	proto.c
 
 OBJS	= $(SRCS:.c=.o)
 CFLAGS	= -O3
