@@ -11,9 +11,10 @@
 #ifndef MKM_H_INCLUDED
 # define MKM_H_INCLUDED
 
-int exec(char *progname);
+int execname(char *progname, t_arg *arg);
 int copy_cfile(int fdfile);
 int listdir(DIR *fd, int fdfile);
 int write_file(int fd, char *prog);
+int find_force(int ac, char **av);
 
 #endif

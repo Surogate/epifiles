@@ -1,24 +1,24 @@
 ##
 ## Makefile for project in /u/all/ancel_a/cu/travail/c/
-## 
+##
 ## Made by francois1 ancel
 ## Login   <ancel_a@epitech.net>
-## 
-## Started on  Wed Feb 24 14:54:39 2010 francois1 ancel
-## Last update Thu Feb 25 12:10:14 2010 francois1 ancel
+##
+## Started on  Fri Mar 26 11:00:37 2010 francois1 ancel
+## Last update Fri Mar 26 11:00:37 2010 francois1 ancel
 ##
 
-NAME	= mkm
+NAME	= test
 CC	= gcc
 RM	= rm -rf
-SRCS	= mkm.c	\
+SRCS	= mkm.c		\
 	make_header.c
 
 OBJS	= $(SRCS:.c=.o)
-CFLAGS	= -O3 -W -Wall -Wextra
+CFLAGS	= -W -Wall -Wextra -O3 -ansi
 LDFLAGS	= -lc
 
-$(NAME) : $(OBJS)
+$(NAME)	: $(OBJS)
 	$(CC) $(LDFLAGS) -o $(NAME) $(OBJS)
 
 all	: $(NAME)
