@@ -35,7 +35,7 @@ int open_name(char *filename)
 {
   int len = strlen(filename);
 
-  if (filename[len - 1] == 'c' && filename[len - 2] == '.')
+  if (filename[len - 2] == '.')
     {
       filename[len - 1] = 'h';
       return (open(filename, O_CREAT | O_EXCL | O_WRONLY, 00644));
