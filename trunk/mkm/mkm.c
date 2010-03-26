@@ -17,9 +17,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+
+typedef struct
+{
+  int force;
+} t_arg;
+
 #include "mkm.h"
 #include "make_header.h"
-
 #define D_FILEA "NAME\t= "
 #define D_FILEB "\nCC\t= gcc\nRM\t= rm -rf\nSRCS\t= "
 #define D_CFLAGS "-W -Wall -Wextra -O3 -ansi"
@@ -28,11 +33,20 @@
 int main(int ac, char **av)
 {
   int result;
+  t_arg arg;
+  int i;
 
-  if (ac > 1)
-    result = exec(av[1]);
-  else
-    result = exec("prog");
+  i = 1;
+  result = 2;
+  arg.force = find_force(ac, av);
+  while (i < ac)
+    {
+      if (strcmp(av[i], "-f"))
+	result = execname(av[i], &arg);
+      i++;
+    }
+  if (result == 2)
+    result = execname("prog", &arg);
   if (result != EXIT_SUCCESS)
     {
       if (result == EXIT_FAILURE)
@@ -43,12 +57,33 @@ int main(int ac, char **av)
   return (EXIT_SUCCESS);
 }
 
-int exec(char *progname)
+int find_force(int ac, char **av)
+{
+  int i;
+
+  i = 0;
+  while (i < ac)
+    {
+      if (!strcmp(av[i], "-f"))
+	return (1);
+      i++;
+    }
+  return (0);
+}
+
+int execname(char *progname, t_arg *arg)
 {
   int fdfile;
   int result;
+  int open_arg;
 
-  fdfile = open("Makefile", O_WRONLY | O_CREAT | O_EXCL, 00600);
+  if (!strcmp(progname, "-f"))
+    return (EXIT_SUCCESS);
+  if (arg->force)
+    open_arg = O_WRONLY | O_CREAT | O_TRUNC;
+  else
+    open_arg = O_WRONLY | O_CREAT | O_EXCL;
+  fdfile = open("Makefile", open_arg, 00600);
   if (fdfile > 0)
     {
       result = write_file(fdfile, progname);
