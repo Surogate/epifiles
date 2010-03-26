@@ -16,6 +16,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "mkc.h"
+#include "define.h"
 
 int main(int ac, char **av)
 {
@@ -59,7 +60,7 @@ int open_name(char *filename)
 int execfile(char *filename)
 {   
   int fd;
-  char include[] = "#include <unistd.h>\n#include <stdlib.h>\n#include <stdio.h>\n";
+  char include[] = C_INCLUDE;
   char *name;
   int len;
 
