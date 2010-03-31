@@ -4,15 +4,15 @@
 ## Made by francois1 ancel
 ## Login   <ancel_a@epitech.net>
 ##
-## Started on  Fri Mar 26 11:00:37 2010 francois1 ancel
-## Last update Fri Mar 26 11:00:37 2010 francois1 ancel
+## Started on  Wed Mar 31 13:55:23 2010 francois1 ancel
+## Last update Wed Mar 31 13:55:23 2010 francois1 ancel
 ##
 
-NAME	= test
+NAME	= mkm
 CC	= gcc
 RM	= rm -rf
-SRCS	= mkm.c		\
-	make_header.c
+SRCS	= make_header.c		\
+	mkm.c
 
 OBJS	= $(SRCS:.c=.o)
 CFLAGS	= -W -Wall -Wextra -O3 -ansi
