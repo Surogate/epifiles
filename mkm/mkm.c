@@ -28,7 +28,7 @@ typedef struct
 #define D_FILEA "NAME\t= "
 #define D_FILEB "\nCC\t= gcc\nRM\t= rm -rf\nSRCS\t= "
 #define D_CFLAGS "-W -Wall -Wextra -O3 -ansi"
-#define D_FILEC "\n\nOBJS\t= $(SRCS:.c=.o)\nCFLAGS\t= -Wall -Wextra -O3 -ansi\nLDFLAGS\t= -lc\n\n$(NAME)\t: $(OBJS)\n\t$(CC) $(LDFLAGS) -o $(NAME) $(OBJS)\n\nall\t: $(NAME)\n\n-c-o\t: $(SRCS)\n\t$(CC) -c -o $@ $<\n\nclean\t:\n\t$(RM) $(OBJS)\n\nfclean\t: clean\n\t$(RM) $(NAME)\n\nre\t: fclean all\n\n.PHONY\t: all clean fclean re"
+#define D_FILEC "\n\nOBJS\t= $(SRCS:.c=.o)\nCFLAGS\t= -Wall -Wextra -O3 -ansi\nLDFLAGS\t= -lc\n\n$(NAME)\t: $(OBJS)\n\t$(CC) $(LDFLAGS) -o $(NAME) $(OBJS)\n\nall\t: $(NAME)\n\n.c.o\t: $(SRCS)\n\t$(CC) -c -o $@ $<\n\nclean\t:\n\t$(RM) $(OBJS)\n\nfclean\t: clean\n\t$(RM) $(NAME)\n\nre\t: fclean all\n\n.PHONY\t: all clean fclean re"
 
 int main(int ac, char **av)
 {
