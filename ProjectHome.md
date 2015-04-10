@@ -1,0 +1,1 @@
+To easily make a file with Epitech standarts
